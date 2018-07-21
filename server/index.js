@@ -1,4 +1,11 @@
 const Hapi = require('hapi');
+const webpush = require('web-push');
+
+webpush.setVapidDetails(
+    'mailto:fake@fake.com',
+    require('./keys.json').publicKey,
+    require('./keys.json').privateKey
+);
 
 const server = Hapi.server({
     port: process.env.PORT || 3000,
@@ -50,13 +57,44 @@ const init = async () => {
                 .catch(function(err) {
                     console.log('err: ', err);
                 })
-                
+
                 return tmp;
             }
         }
-    })
+    });
+
+    server.route({
+      method: 'POST',
+      path: '/api/trigger-push-msg',
+      handler: function(request, h) {
+          return knex
+          .select('*')
+          .from('subscriptions')
+          .then(function(subscriptions) {
+              return Promise.all(subscriptions.map(function(subscription) {
+                  console.log(subscription);
+                  return triggerPushMessage(subscription.subscription);   
+              }));
+          });
+      }  
+    });
 
 };
+
+function triggerPushMessage(subscription) {
+    var obj = {
+        title: 'I am push notification',
+        body: 'Yay it works.'
+    };
+
+    return webpush.sendNotification(subscription, JSON.stringify(obj))
+    .then(function(response) {
+        console.log('line 85 ', response);
+    })
+    .catch(function(err) {
+        console.log('err! ', err);
+    });
+}
 
 process.on('unhandledRejection', (err) => {
     console.log(err);

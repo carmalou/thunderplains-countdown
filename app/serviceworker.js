@@ -61,8 +61,20 @@ self.onfetch = function(event) {
 
 self.onpush = function(event) {
     // this function runs on push
+    var data = JSON.parse(event.data.text());
 
-    console.log('WOO!');
-    console.log('we got a push event!');
-    console.log(event);
+    var title = data.title;
+    var options = {
+        body: data.body
+    };
+
+    event.waitUntil(self.registration.showNotification(title, options));
 }
+
+// TODO: make this match the others
+self.addEventListener('notificationclick', function(event) {
+    // this runs when we click on the notification
+    event.notification.close();
+
+    event.waitUntil(clients.openWindow('https://2018.thunderplainsconf.com/'));
+});
