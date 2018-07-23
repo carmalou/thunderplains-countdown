@@ -27,7 +27,7 @@ if(navigator.serviceWorker) {
             // if not, ask to subscribe
             return swReg.pushManager.getSubscription()
             .then(function(subscription) {
-                if(!subscription) {
+                if(subscription) {
                     return;
                 } else {
                     // set up push
