@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+}
+.parent-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url('./img/background.jpg') #3d4949 bottom no-repeat;
+    background-size: cover;
+    color: #fff;
+    font-family: "-apple-system","system-ui","BlinkMacSystemFont","Segoe UI","Roboto","Helvetica Neue","sans-serif";
+}
+
+.parent-container a {
+ color: #fff;   
+}
