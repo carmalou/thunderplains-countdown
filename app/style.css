@@ -16,3 +16,10 @@ body {
 .parent-container a {
  color: #fff;   
 }
+
+.content-parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

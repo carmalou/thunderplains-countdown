@@ -68,9 +68,10 @@ function countdown() {
     var months = duration.get('months');
     var days = duration.get('days');
     var hours = duration.get('hours');
+    var minutes = duration.get('minutes');
     var seconds = duration.get('seconds');
 
-    document.getElementById('countdown_span').textContent = months + " months " + days + " days  " + hours + " hours and " + seconds + " seconds.";
+    document.getElementById('countdown_span').textContent = months + " months " + days + " days  " + hours + " hours " + minutes + " minutes and " + seconds + " seconds.";
 }
 
 window.setInterval(countdown, 1000);
