@@ -11,6 +11,9 @@ body {
     background-size: cover;
     color: #fff;
     font-family: "-apple-system","system-ui","BlinkMacSystemFont","Segoe UI","Roboto","Helvetica Neue","sans-serif";
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .parent-container a {
